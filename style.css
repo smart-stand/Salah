@@ -1,5 +1,5 @@
 /* =========================================
-   RESET & TOKENS (BROWN FLOOR TONES + RED ACTIVE)
+   RESET & TOKENS (BLACK BLEND + GOLD SECTIONS)
 ========================================= */
 
 * {
@@ -13,20 +13,25 @@ html {
 }
 
 :root {
-    --ink: #2b1a10;        /* بني غامق (لون أرضيات الباركيه) */
-    --surface: #3a2415;    /* الكاردات */
-    --surface-2: #4b3020;  /* الهوفر والتحديد */
-    --bone: #f4e8d6;       /* النصوص كريمي فاتح */
-    --muted: #c4a888;      /* النصوص الفرعية */
-    --brass: #d9b48a;      /* أكسنت بيج/خشبي دافي */
-    --brass-light: #c79d6d;
-    --on-brass: #2b1a10;   /* لون النص فوق الأكسنت */
-    --red: #e0202c;        /* الأحمر عند الضغط */
-    --line: rgba(217, 180, 138, 0.25);
+    --ink: #070707;        /* أرضية سوداء */
+    --surface: #12100c;    /* الكاردات */
+    --surface-2: #1d1910;  /* الهوفر والتحديد */
+    --bone: #f6ecd2;       /* النصوص كريمي ذهبي فاتح */
+    --muted: #b7a98a;      /* النصوص الفرعية */
+    --brass: #d4af37;      /* الجولد (الأكسنت الأساسي) */
+    --brass-light: #f0d68a;
+    --on-brass: #130e02;   /* لون النص فوق الجولد */
+    --press: #d4af37;      /* لون الضغط: جولد */
+    --line: rgba(212, 175, 55, 0.38);
 }
 
 body {
-    background: var(--ink);
+    background:
+        radial-gradient(120% 55% at 50% 0%, rgba(212, 175, 55, 0.16) 0%, rgba(212, 175, 55, 0) 60%),
+        radial-gradient(90% 40% at 100% 100%, rgba(212, 175, 55, 0.10) 0%, rgba(212, 175, 55, 0) 70%),
+        linear-gradient(180deg, #14110a 0%, #070707 45%, #0b0905 100%);
+    background-attachment: fixed;
+    background-color: var(--ink);
     color: var(--bone);
     font-family: "Inter", sans-serif;
     overflow-x: hidden;
@@ -171,7 +176,7 @@ a {
     margin: 0 auto;
     min-height: 100vh;
     position: relative;
-    background: var(--ink);
+    background: transparent;
 }
 
 #content::before,
@@ -196,21 +201,17 @@ a {
 
 /* اللوجو الأصلي فيه مساحة شفافة كبيرة حواليه، فبنقصها بالـ crop ده ونكبّر اللوجو */
 .store-logo {
-    position: relative;
-    width: min(100%, 380px);
-    aspect-ratio: 150 / 81;
-    overflow: hidden;
-    margin: 0 auto 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 10px;
 }
 
 .store-logo img {
-    position: absolute;
-    width: 130%;
-    max-width: none;
+    width: min(100%, 340px);
     height: auto;
-    left: -12.15%;
-    top: -72.84%;
-    margin: 0;
+    object-fit: contain;
+    display: block;
 }
 
 .small-title {
@@ -246,7 +247,7 @@ a {
     font-family: "Fraunces", serif;
     font-size: 28px;
     font-weight: 500;
-    color: var(--bone);
+    color: var(--brass);
     line-height: 1.2;
 }
 
@@ -267,9 +268,9 @@ a {
     width: 100%;
     padding: 18px 20px;
     border: 1px solid var(--line);
-    background: var(--surface);
+    background: linear-gradient(145deg, #1b160a 0%, #0f0d08 100%);
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 22px rgba(212, 175, 55, 0.08);
 }
 
 .contact-number-row {
@@ -397,13 +398,13 @@ a {
     min-width: 96px;
     padding: 22px 10px 18px;
     border: 1px solid var(--line);
-    background: var(--surface);
+    background: linear-gradient(145deg, #1b160a 0%, #0f0d08 100%);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.45), 0 0 18px rgba(212, 175, 55, 0.07);
     transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
 }
 
@@ -531,7 +532,7 @@ button:focus-visible {
 }
 
 /* =========================================
-   RED ON PRESS — أي أيقونة تقلب أحمر عند الضغط
+   GOLD ON PRESS — أي أيقونة تقلب جولد عند الضغط
 ========================================= */
 
 .circle-icon,
@@ -545,18 +546,68 @@ button:focus-visible {
 .social-card:hover .social-icon,
 .social-card:active .social-icon,
 .social-card:focus-visible .social-icon {
-    background: var(--red) !important;
-    color: #ffffff !important;
-    border-color: var(--red) !important;
+    background: var(--press) !important;
+    color: var(--on-brass) !important;
+    border-color: var(--press) !important;
 }
 
 .social-card:active,
 .circle-action:active {
-    border-color: var(--red);
+    border-color: var(--press);
+    box-shadow: 0 0 22px rgba(212, 175, 55, 0.35);
 }
 
 .copy-chip:active {
-    background: var(--red);
-    border-color: var(--red);
-    color: #ffffff;
+    background: var(--press);
+    border-color: var(--press);
+    color: var(--on-brass);
+}
+
+
+/* =========================================
+   PAYMENT (Vodafone Cash + InstaPay)
+========================================= */
+
+.payment-wallet-row {
+    margin-bottom: 14px;
+}
+
+.payment-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--bone);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.25s ease;
+}
+
+.payment-btn .circle-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 19px;
+    background: var(--brass);
+    color: var(--on-brass);
+}
+
+.payment-btn:hover,
+.payment-btn:active,
+.payment-btn:focus-visible {
+    background: var(--press);
+    border-color: var(--press);
+    color: var(--on-brass);
+    transform: translateY(-2px);
+}
+
+.payment-btn:hover .circle-icon,
+.payment-btn:active .circle-icon,
+.payment-btn:focus-visible .circle-icon {
+    background: var(--on-brass);
+    color: var(--press);
 }
